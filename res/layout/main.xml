@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+   <ru.vorobjev.rbcnews.views.DashboardLayout        android:layout_width="fill_parent"        android:layout_height="fill_parent">        <Button android:id="@+id/home_btn_new_message"            android:onClick="getNews"            style="@style/DashboardButton"            android:text="@string/btn_list_news"            android:drawableTop="@android:drawable/ic_menu_agenda" />        <Button android:id="@+id/home_btn_messages"            android:onClick="getPreferences"            style="@style/DashboardButton"            android:text="@string/btn_preferences"            android:drawableTop="@android:drawable/ic_menu_preferences" />    </ru.vorobjev.rbcnews.views.DashboardLayout>
+
+</LinearLayout>
