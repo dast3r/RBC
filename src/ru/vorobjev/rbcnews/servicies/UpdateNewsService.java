@@ -23,11 +23,12 @@ import org.xml.sax.SAXException;
 
 import ru.vorobjev.rbcnews.activities.NewsActivity;
 import ru.vorobjev.rbcnews.constants.C;
-import ru.vorobjev.rbcnews.db.DatabaseHandler;
+import ru.vorobjev.rbcnews.db.DBProvider;
 import ru.vorobjev.rbcnews.exceptions.ErrorStatusException;
 import ru.vorobjev.rbcnews.objects.RssItem;
 import ru.vorobjev.rbcnews.utils.PreferencesHelper;
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
@@ -74,13 +75,25 @@ public class UpdateNewsService extends Service {
 	}
 
 	private void writeToDB(ArrayList<RssItem> rssItems) {
-		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-		db.open();
-		db.clearTable(C.RSS_ITEMS_TABLE);
+		// DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		// db.open();
+		// db.clearTable(C.RSS_ITEMS_TABLE);
+		// for (RssItem item : rssItems) {
+		// db.insertRssItem(item);
+		// }
+		// db.close();
+		getContentResolver().delete(DBProvider.RSS_CONTENT_URI, null, null);
 		for (RssItem item : rssItems) {
-			db.insertRssItem(item);
+			ContentValues values = new ContentValues();
+			values.put(C.RSS_ITEMS_TABLE_TITLE, item.getTitle());
+			values.put(C.RSS_ITEMS_TABLE_DESCRIPTION, item.getDescription());
+			values.put(C.RSS_ITEMS_TABLE_PUBDATE,
+					item.getPubDate() != null 
+					? new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH).format(item.getPubDate()) 
+							: null);
+			values.put(C.RSS_ITEMS_TABLE_LINK, item.getLink());
+			getContentResolver().insert(DBProvider.RSS_CONTENT_URI, values);
 		}
-		db.close();
 	}
 
 	private ArrayList<RssItem> getRssItems(String feedUrl)

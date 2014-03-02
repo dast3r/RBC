@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -16,9 +17,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="ru.vorobjev.rbcnews.activities.SplashActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +27,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="ru.vorobjev.rbcnews.activities.WebsterActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name=".WebsterActivity" />
 
@@ -36,10 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="ru.vorobjev.rbcnews.activities.ViewActivity"
             android:label="Просмотр"
-            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity" >
+            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -47,16 +48,16 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.vorobjev.rbcnews.activities.WebsterActivity" />
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="ru.vorobjev.rbcnews.activities.NewsActivity"
             android:label="Новости"
-            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity" >
+            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name=".NewsActivity" />
 
@@ -68,14 +69,14 @@
                 android:value="ru.vorobjev.rbcnews.activities.WebsterActivity" />
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="ru.vorobjev.rbcnews.activities.PreferencesActivity"
             android:label="Настройки"
-            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity" >
+            android:parentActivityName="ru.vorobjev.rbcnews.activities.WebsterActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
             <action android:name=".PreferencesActivity" />
 
             <category android:name="android.intent.category.DEFAULT" />
-            
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.vorobjev.rbcnews.activities.WebsterActivity" />
@@ -85,6 +86,11 @@
             android:name="ru.vorobjev.rbcnews.servicies.UpdateNewsService"
             android:enabled="true" >
         </service>
+
+        <provider
+            android:name="ru.vorobjev.rbcnews.db.DBProvider"
+            android:authorities="ru.vorobjev.providers.rbcnews"
+            android:exported="false" />
     </application>
 
 </manifest>

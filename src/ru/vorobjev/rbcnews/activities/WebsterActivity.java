@@ -1,7 +1,6 @@
 package ru.vorobjev.rbcnews.activities;
 
 import ru.vorobjev.rbcnews.R;
-import ru.vorobjev.rbcnews.db.DatabaseHandler;
 import ru.vorobjev.rbcnews.servicies.UpdateNewsService;
 import ru.vorobjev.rbcnews.utils.PreferencesHelper;
 import android.app.AlarmManager;
@@ -23,7 +22,6 @@ public class WebsterActivity extends FragmentActivity {
 	
 	private AlarmManager alarmManager;
 	private BroadcastReceiver br;
-	private DatabaseHandler db;
 
 	
 	
@@ -32,7 +30,6 @@ public class WebsterActivity extends FragmentActivity {
 		super.onCreate(bundle);
 		setContentView(R.layout.main);
 		
-//		startDB();
 		initializeAlarmManager();
 		initializeBroadcastReceiver();
 		startRefreshingService();
@@ -47,7 +44,6 @@ public class WebsterActivity extends FragmentActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(br);
-//		db.close();
 	}
 
 	
@@ -66,11 +62,6 @@ public class WebsterActivity extends FragmentActivity {
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 	}
 	
-//	private void startDB() {
-//		db = new DatabaseHandler(this);
-//		db.open();
-//	}
-
 	private void startRefreshingService() {
 		Intent intent = new Intent(this, UpdateNewsService.class);
 		PendingIntent pending = PendingIntent.getService(this, 0, intent, 0);
